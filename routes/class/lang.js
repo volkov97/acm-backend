@@ -31,7 +31,6 @@ class LangService {
 
     langExists(lang) {
         return new Promise((res, rej) => {
-
             this.getLangs().then(
                 (data) => {
                     const lang_exists = data.indexOf(lang) + 1;
@@ -39,7 +38,6 @@ class LangService {
                 },
                 () => rej()
             );
-
         });
     }
 
@@ -69,7 +67,7 @@ class LangService {
                         pool.connect((err, client, done) => {
                             if (err) return console.error('error fetching client from pool', err);
                             
-                            client.query(`SELECT id, key, context, ${lang}  FROM dictionary`, (err, result) => {
+                            client.query(`SELECT key, ${lang} FROM dictionary`, (err, result) => {
                                 done();
 
                                 if (err) return console.error('error running query', err);

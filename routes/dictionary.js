@@ -1,23 +1,30 @@
 const express = require('express');
 const router = express.Router();
 
-const pool = require('../config/db.js');
+const langService = require('./class/lang');
 
 // GET /dictionary
 router.get('/', (req, res, next) => {
 
-	pool.connect((err, client, done) => {
-		if (err) return console.error('error fetching client from pool', err);
-		
-		client.query('SELECT id, key, context, eng FROM dictionary', (err, result) => {
-			done();
+	// ?lang=rus
+	if (req.query.lang) {
+		langService.getDictionary(req.query.lang).then(
+			data => res.json(data),
+			err => handleErrors(err)
+		);
 
-			if (err) return console.error('error running query', err);
+		return;
+	}
 
-			res.json(result.rows);
-		});
-	});
-
+	langService.getAllDictionaries().then(
+		data => res.json(data),
+		err => handleErrors(err)
+	);
 });
+
+function handleErrors(err) {
+	throw err;
+	return;
+}
 
 module.exports = router;

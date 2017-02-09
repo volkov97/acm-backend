@@ -11,10 +11,14 @@ const dictionary = require('./routes/dictionary');
 
 const app = express();
 
+app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/dictionary', dictionary);

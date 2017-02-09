@@ -16,4 +16,3 @@ pool.on('error', function (err, client) {
 });
 
 module.exports = pool;
-

@@ -2,9 +2,6 @@ const pool = require('../../config/db');
 
 class LangService {
 
-    constructor() {
-    }
-
     getLangs() {
         return new Promise((res, rej) => {
             const sql_lang = "SELECT * FROM d3hknf0t40kep6.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'dictionary'"; 
@@ -78,6 +75,22 @@ class LangService {
                     },
                     err => rej(err)
                 );
+        });
+    }
+
+    getExpression(id) {
+        return new Promise((res, rej) => {
+            pool.connect((err, client, done) => {
+                if (err) return rej(err);
+                
+                client.query(`SELECT * FROM dictionary WHERE id=${id}`, (err, result) => {
+                    done();
+
+                    if (err) return console.error('error running query', err);
+
+                    res(result.rows);
+                });
+            });
         });
     }
 

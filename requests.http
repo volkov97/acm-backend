@@ -1,0 +1,19 @@
+GET http://localhost:3000/news
+
+#####
+
+GET http://localhost:3000/news/1
+
+#####
+
+POST http://localhost:3000/news HTTP/1.1
+content-type: application/json
+
+{
+    "title": "another task",
+    "date": "2016-09-07",
+    "descr": "another description",
+    "content": "another cool content"
+}
+
+#####

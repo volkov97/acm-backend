@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const langService = require('./class/lang');
+const handleErrors = require('./handlers/error').handleErrors;
+const dictionaryService = require('./service/dictionary-service');
 
 // GET /dictionary
 router.get('/', (req, res, next) => {
 
 	// ?lang=rus
 	if (req.query.lang) {
-		langService.getDictionary(req.query.lang).then(
+		dictionaryService.getDictionary(req.query.lang).then(
 			data => res.json(data),
 			err => handleErrors(err)
 		);
@@ -16,15 +17,15 @@ router.get('/', (req, res, next) => {
 		return;
 	}
 
-	langService.getAllDictionaries().then(
+	dictionaryService.getAllDictionaries().then(
 		data => res.json(data),
 		err => handleErrors(err)
 	);
 });
 
-function handleErrors(err) {
-	throw err;
-	return;
-}
+// GET /dictionary/:id
+router.get('/:id', (req, res, next) => {
+	dictionaryService.getExpression(req.params.id);
+});
 
 module.exports = router;

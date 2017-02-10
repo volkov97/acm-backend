@@ -9,6 +9,7 @@ const cors = require('cors');
 const index = require('./routes/index');
 const pages = require('./routes/pages');
 const dictionary = require('./routes/dictionary');
+const news = require('./routes/news');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(cors());
 
 app.use('/', index);
 app.use('/dictionary', dictionary);
+app.use('/news', news);
 app.use('/pages', pages);
 
 // catch 404 and forward to error handler

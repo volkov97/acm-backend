@@ -7,30 +7,30 @@ class NewsItem {
         this.content = obj.content;
     }
 
-    checkDate() {
+    static checkDate(date) {
         return 1;
     }
 
-    checkTitle() {
-        if (this.title.length == 0) return 0;
+    static checkTitle(title) {
+        if (title.length == 0) return 0;
         return 1;
     }
 
-    checkDescr() {
-        if (this.descr.length == 0) return 0;
+    static checkDescr(descr) {
+        if (descr.length == 0) return 0;
         return 1;
     }
 
-    checkContent() {
-        if (this.content.length == 0) return 0;
+    static checkContent(content) {
+        if (content.length == 0) return 0;
         return 1;
     }
 
-    check() {
-        return this.checkDate()
-            && this.checkTitle()
-            && this.checkDescr()
-            && this.checkContent();
+    static isValid(item) {
+        return this.checkDate(item.date)
+            && this.checkTitle(item.title)
+            && this.checkDescr(item.descr)
+            && this.checkContent(item.content);
     }
 
 }

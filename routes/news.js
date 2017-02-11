@@ -1,34 +1,28 @@
 const express = require('express');
 const router = express.Router();
+const NewsService = require('./service/news-service');
 
-const handleErrors = require('./handlers/error').handleErrors;
-const newsService = require('./service/news-service');
+const newsService = new NewsService();
 
 // GET /news
-router.get('/', (req, res, next) => {
-    newsService.getList().then(
-        data => res.json(data),
-        err => handleErrors(err)
-    );
+router.get('/', (req, res) => {
+    newsService.getList(req.query.lang)
+        .then(newsList => res.json(newsList))
+        .catch(reason => res.status(500).json(reason));
 });
 
 // GET /news/:id
-router.get('/:id', (req, res, next) => {
-	newsService.getItem(req.params.id).then(
-        data => res.json(data),
-        err => handleErrors(err)
-    );
+router.get('/:id', (req, res) => {
+	newsService.getItem(req.params.id, req.query.lang)
+        .then(newsItem => res.json(newsItem))
+        .catch(reason => res.status(500).json(reason));
 });
 
 // POST /news/
-router.post('/', (req, res, next) => {
-    console.log('a');
-    if (!newsService.checkItem(req.body)) res.sendStatus(400);
-console.log('b');
-    newsService.addItem(req.body).then(
-        data => res.json(data),
-        err => handleErrors(err)
-    );
+router.post('/', (req, res) => {
+    newsService.addItem(req.body, req.query.lang)
+        .then(index => res.end(String(index)))
+        .catch(reason => res.status(500).json(reason));
 });
 
 module.exports = router;

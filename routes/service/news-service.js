@@ -1,122 +1,112 @@
 const pool = require('../../config/db');
+const langDefault = require('../../config/lang').lang_default;
+const db_name = require('../../config/db_config').database;
+
 const NewsItem = require('../class/news-item');
 
 class NewsService {
 
-    checkItem(item) {
-        return new NewsItem(item).check(); 
+    constructor() {
+        this.db_table = 'news';
     }
 
-    getList() {
-        return new Promise((res, rej) => {
-            // fix nt.news_id and nd.news_id
-            const sql_getList = `
-                SELECT n.id, n.date, nt.en as title, nd.en as descr
-                FROM news n
-                INNER JOIN news_title nt ON n.id = nt.id
-                INNER JOIN news_descr nd ON n.id = nd.id
-            `;
+    _setLanguage(lang, lang_array) {
+        lang = lang || langDefault;
 
+        const lang_columns = lang_array.filter(_ => (_.indexOf(`_${lang}`) + 1)).length;
+        if (lang_columns !== 3) lang = langDefault;
+        
+        return lang;
+    }
+
+    getList(lang) {
+        return new Promise((resolve, reject) => {
             pool.connect((err, client, done) => {
-                if (err) return console.error('error fetching client from pool', err);
-                
-                client.query(sql_getList, (err, result) => {
-                    done();
+                if (err) reject('Pool connection failed.');
 
-                    if (err) return console.error('error running query', err);
+                const sql_lang = `
+                    SELECT *
+                    FROM ${db_name}.INFORMATION_SCHEMA.COLUMNS
+                    WHERE TABLE_NAME = N'${this.db_table}'
+                `;
 
-                    res(result.rows);
+                client.query(sql_lang, (err, result) => {
+                    if (err) reject('Query failed: language check');
+
+                    lang = this._setLanguage(lang, result.rows.map(_ => _.column_name));
+
+                    const sql_getList = `
+                        SELECT id, date, title_${lang}, descr_${lang}  
+                        FROM ${this.db_table}
+                    `;
+
+                    client.query(sql_getList, (err, result) => {
+                        if (err) reject('Query failed: list select');
+                        done();
+
+                        resolve(result.rows);
+                    });
                 });
             });
-
         });
     }
 
-    getItem(id) {
-        return new Promise((res, rej) => {
-            // fix nt.news_id and nd.news_id
-            const sql_getList = `
-                SELECT n.id, n.date, nt.en as title, nc.en as content
-                FROM news n
-                INNER JOIN news_title nt ON n.id = nt.id
-                INNER JOIN news_content nc ON n.id = nc.id
-                WHERE n.id = ${id}
-            `;
-
+    getItem(id, lang) {
+        return new Promise((resolve, reject) => {
             pool.connect((err, client, done) => {
-                if (err) return console.error('error fetching client from pool', err);
-                
-                client.query(sql_getList, (err, result) => {
-                    done();
+                if (err) reject('Pool connection failed.');
 
-                    if (err) return console.error('error running query', err);
+                const sql_lang = `
+                    SELECT *
+                    FROM ${db_name}.INFORMATION_SCHEMA.COLUMNS
+                    WHERE TABLE_NAME = N'${this.db_table}'
+                `;
 
-                    res(result.rows);
+                client.query(sql_lang, (err, result) => {
+                    if (err) reject('Query failed: language check');
+
+                    lang = this._setLanguage(lang, result.rows.map(_ => _.column_name));
+
+                    const sql_getItem = `
+                        SELECT id, date, title_${lang}, content_${lang}  
+                        FROM ${this.db_table}
+                        WHERE id = ${id}
+                    `;
+
+                    client.query(sql_getItem, (err, result) => {
+                        if (err) reject('Query failed: item select');
+                        done();
+
+                        resolve(result.rows);
+                    });
                 });
             });
-
         });
     }
-    /*
+
     addItem(item, lang) {
-        lang = lang ? lang : 'en';
-
-        return new Promise((res, rej) => {
-            const sql_addToNews = `
-                INSERT INTO news (date)
-                VALUES (${item.date})
-            `;
-
-            const sql_addToNewsTitle = `
-                INSERT INTO news_title (${lang})
-                VALUES (${item.title})
-            `;
-
-            const sql_addToNewsDescr = `
-                INSERT INTO news_descr (${lang})
-                VALUES (${item.descr})
-            `;
-
-            const sql_addToNewsContent = `
-                INSERT INTO news_content (${lang})
-                VALUES (${item.content})
-            `;
-
+        return new Promise((resolve, reject) => {
+            if (!lang) reject('language is required');
+            if (!NewsItem.isValid(item)) reject('item has incorrect fields');
+            
             pool.connect((err, client, done) => {
-                if (err) return console.error('error fetching client from pool', err);
-                
-                client.query(sql_addToNews, (err, result) => {
-                    if (err) return console.error('error running query', err);
-                    queryDone();
+                if (err) reject('Pool connection failed.');
+
+                const sql_insert = `
+                    INSERT INTO ${this.db_table} (date, title_${lang}, descr_${lang}, content_${lang})
+                    VALUES ('${item.date}', '${item.title}', '${item.descr}', '${item.content}')
+                    RETURNING id;
+                `;
+
+                client.query(sql_insert, (err, result) => {
+                    if (err) reject('Query failed: insert query');
+                    done();
+
+                    resolve(result.rows[0].id);
                 });
-
-                client.query(sql_addToNewsTitle, (err, result) => {
-                    if (err) return console.error('error running query', err);
-                    queryDone();
-                });
-
-                client.query(sql_addToNewsDescr, (err, result) => {
-                    if (err) return console.error('error running query', err);
-                    queryDone();
-                });
-
-                client.query(sql_addToNewsContent, (err, result) => {
-                    if (err) return console.error('error running query', err);
-                    queryDone();
-                });
-
-                function queryDone() {
-                    queryDone.queries--;
-
-                    if (queryDone.queries == 0) done();
-                }
-                queryDone.queries = 4;
             });
-
         });
     }
-    */
-
 }
 
-module.exports = new NewsService();
+module.exports = NewsService;

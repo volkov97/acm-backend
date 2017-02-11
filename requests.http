@@ -1,19 +1,45 @@
+##### get news list
+
 GET http://localhost:3000/news
 
 #####
 
-GET http://localhost:3000/news/1
+GET http://localhost:3000/news?lang=ru
 
 #####
 
-POST http://localhost:3000/news HTTP/1.1
+GET http://localhost:3000/news?lang=en
+
+#####
+
+GET http://localhost:3000/news?lang=tuw
+
+##### get news item
+
+GET http://localhost:3000/news/5
+
+#####
+
+GET http://localhost:3000/news/5?lang=ru
+
+#####
+
+GET http://localhost:3000/news/5?lang=en
+
+#####
+
+GET http://localhost:3000/news/3?lang=tuw
+
+#####
+
+POST http://localhost:3000/news?lang=en HTTP/1.1
 content-type: application/json
 
 {
-    "title": "another task",
-    "date": "2016-09-07",
-    "descr": "another description",
-    "content": "another cool content"
+    "title": "another tas 112 k",
+    "date": "2017-02-07T21:00:00.000Z",
+    "descr": "another 1 2description",
+    "content": "r"
 }
 
 #####

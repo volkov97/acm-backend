@@ -7,7 +7,7 @@ class WordService {
     constructor() {
         this.db_table = 'dictionary';
     }
-    
+
     /*
     getLangs() {
         return new Promise((res, rej) => {
@@ -152,7 +152,12 @@ class WordService {
                         return;
                     }
 
-                    resolve(result.rows);
+                    let dictionary = {};
+                    result.rows.forEach(word => {
+                        dictionary[word.key] = word[lang];
+                    });
+
+                    resolve(dictionary);
                 });
             });
         });

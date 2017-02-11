@@ -96,4 +96,4 @@ class LangService {
 
 }
 
-module.exports = new LangService();
+module.exports = LangService;

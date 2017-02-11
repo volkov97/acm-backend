@@ -44,7 +44,7 @@ content-type: application/json
 
 #####
 
-PUT http://localhost:3000/news/333?lang=en HTTP/1.1
+PUT http://localhost:3000/news/16?lang=en HTTP/1.1
 content-type: application/json
 
 {
@@ -56,4 +56,4 @@ content-type: application/json
 
 #####
 
-DELETE http://localhost:3000/news/8
+DELETE http://localhost:3000/news/16

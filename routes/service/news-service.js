@@ -23,7 +23,7 @@ class NewsService {
                 }
 
                 const sql_getList = `
-                    SELECT id, date, title_${lang}, descr_${lang}  
+                    SELECT id, date, title_${lang} as title, descr_${lang} as descr  
                     FROM ${this.db_table}
                 `;
 
@@ -54,7 +54,7 @@ class NewsService {
                 }
 
                 const sql_getItem = `
-                    SELECT id, date, title_${lang}, content_${lang}  
+                    SELECT id, date, title_${lang} as title, content_${lang} as content  
                     FROM ${this.db_table}
                     WHERE id = ${id}
                 `;
@@ -129,7 +129,7 @@ class NewsService {
                         descr_${lang} = '${item.descr}',
                         content_${lang} = '${item.content}'
                     WHERE id=${id}
-                    RETURNING id, date, title_${lang}, descr_${lang}, content_${lang}  
+                    RETURNING id, date, title_${lang} as title, descr_${lang} as descr, content_${lang} as content  
                 `;
 
                 client.query(sql_update, (err, result) => {

@@ -8,7 +8,7 @@ const cors = require('cors');
 
 const index = require('./routes/index');
 const pages = require('./routes/pages');
-const dictionary = require('./routes/dictionary');
+const words = require('./routes/words');
 const news = require('./routes/news');
 
 const app = express();
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', index);
-app.use('/dictionary', dictionary);
+app.use('/words', words);
 app.use('/news', news);
 app.use('/pages', pages);
 

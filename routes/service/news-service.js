@@ -1,7 +1,6 @@
 const pool = require('../../config/db');
-const langDefault = require('../../config/lang').lang_default;
-const db_name = require('../../config/db_config').database;
 
+const ServerError = require('../class/server-error');
 const NewsItem = require('../class/news-item');
 
 class NewsService {
@@ -10,42 +9,32 @@ class NewsService {
         this.db_table = 'news';
     }
 
-    _setLanguage(lang, lang_array) {
-        lang = lang || langDefault;
-
-        const lang_columns = lang_array.filter(_ => (_.indexOf(`_${lang}`) + 1)).length;
-        if (lang_columns !== 3) lang = langDefault;
-        
-        return lang;
-    }
-
     getList(lang) {
         return new Promise((resolve, reject) => {
-            pool.connect((err, client, done) => {
-                if (err) reject('Pool connection failed.');
+            if (!lang) {
+                reject(new ServerError('You need to specify language.'));
+                return;
+            }
 
-                const sql_lang = `
-                    SELECT *
-                    FROM ${db_name}.INFORMATION_SCHEMA.COLUMNS
-                    WHERE TABLE_NAME = N'${this.db_table}'
+            pool.connect((err, client, done) => {
+                if (err) {
+                    reject(new ServerError('Pool connection failed.', err));
+                    return;
+                }
+
+                const sql_getList = `
+                    SELECT id, date, title_${lang}, descr_${lang}  
+                    FROM ${this.db_table}
                 `;
 
-                client.query(sql_lang, (err, result) => {
-                    if (err) reject('Query failed: language check');
+                client.query(sql_getList, (err, result) => {
+                    done();
+                    if (err) {
+                        reject(new ServerError('SQL query failed.', err));
+                        return;
+                    }
 
-                    lang = this._setLanguage(lang, result.rows.map(_ => _.column_name));
-
-                    const sql_getList = `
-                        SELECT id, date, title_${lang}, descr_${lang}  
-                        FROM ${this.db_table}
-                    `;
-
-                    client.query(sql_getList, (err, result) => {
-                        if (err) reject('Query failed: list select');
-                        done();
-
-                        resolve(result.rows);
-                    });
+                    resolve(result.rows);
                 });
             });
         });
@@ -53,32 +42,33 @@ class NewsService {
 
     getItem(id, lang) {
         return new Promise((resolve, reject) => {
-            pool.connect((err, client, done) => {
-                if (err) reject('Pool connection failed.');
+            if (!lang) {
+                reject(new ServerError('You need to specify language.'));
+                return;
+            }
 
-                const sql_lang = `
-                    SELECT *
-                    FROM ${db_name}.INFORMATION_SCHEMA.COLUMNS
-                    WHERE TABLE_NAME = N'${this.db_table}'
+            pool.connect((err, client, done) => {
+                if (err) {
+                    reject(new ServerError('Pool connection failed.', err));
+                    return;
+                }
+
+                const sql_getItem = `
+                    SELECT id, date, title_${lang}, content_${lang}  
+                    FROM ${this.db_table}
+                    WHERE id = ${id}
                 `;
 
-                client.query(sql_lang, (err, result) => {
-                    if (err) reject('Query failed: language check');
+                client.query(sql_getItem, (err, result) => {
+                    done();
+                    if (err) {
+                        reject(new ServerError('SQL query failed.', err));
+                        return;
+                    }
 
-                    lang = this._setLanguage(lang, result.rows.map(_ => _.column_name));
+                    if (!result.rows[0]) reject(new ServerError('This id is not exists.'));
 
-                    const sql_getItem = `
-                        SELECT id, date, title_${lang}, content_${lang}  
-                        FROM ${this.db_table}
-                        WHERE id = ${id}
-                    `;
-
-                    client.query(sql_getItem, (err, result) => {
-                        if (err) reject('Query failed: item select');
-                        done();
-
-                        resolve(result.rows);
-                    });
+                    resolve(result.rows[0]);
                 });
             });
         });
@@ -86,11 +76,17 @@ class NewsService {
 
     addItem(item, lang) {
         return new Promise((resolve, reject) => {
-            if (!lang) reject('language is required');
-            if (!NewsItem.isValid(item)) reject('item has incorrect fields');
+            if (!lang) {
+                reject(new ServerError('You need to specify language.'));
+                return;
+            }
+            if (!NewsItem.isValid(item)) {
+                reject(new ServerError('Item has incorrect fields.'));
+                return;
+            }
             
             pool.connect((err, client, done) => {
-                if (err) reject('Pool connection failed.');
+                if (err) reject(new ServerError('Pool connection failed.', err));
 
                 const sql_insert = `
                     INSERT INTO ${this.db_table} (date, title_${lang}, descr_${lang}, content_${lang})
@@ -99,10 +95,76 @@ class NewsService {
                 `;
 
                 client.query(sql_insert, (err, result) => {
-                    if (err) reject('Query failed: insert query');
+                    if (err) reject(new ServerError('SQL query failed.', err));
                     done();
 
                     resolve(result.rows[0].id);
+                });
+            });
+        });
+    }
+
+    updateItem(id, item, lang) {
+        return new Promise((resolve, reject) => {
+            if (!lang) {
+                reject(new ServerError('You need to specify language.'));
+                return;
+            }
+            if (!NewsItem.isValid(item)) {
+                reject(new ServerError('Item has incorrect fields.'));
+                return;
+            }
+            
+            pool.connect((err, client, done) => {
+                if (err) {
+                    reject(new ServerError('Pool connection failed.', err));
+                    return;
+                }
+
+                const sql_update = `
+                    UPDATE ${this.db_table}
+                    SET
+                        date = '${item.date}',
+                        title_${lang} = '${item.title}',
+                        descr_${lang} = '${item.descr}',
+                        content_${lang} = '${item.content}'
+                    WHERE id=${id}
+                    RETURNING id, date, title_${lang}, descr_${lang}, content_${lang}  
+                `;
+
+                client.query(sql_update, (err, result) => {
+                    done();
+                    if (err) {
+                        reject(new ServerError('SQL query failed.', err));
+                        return;
+                    }
+
+                    if (!result.rows[0]) reject(new ServerError('This id is not exists.'));
+                    
+                    resolve(result.rows[0]);
+                });
+            });
+        });
+    }
+
+    deleteItem(id) {
+        return new Promise((resolve, reject) => {
+            pool.connect((err, client, done) => {
+                if (err) reject(new ServerError('Pool connection failed.', err));
+
+                const sql_update = `
+                    DELETE FROM ${this.db_table}
+                    WHERE id=${id}
+                `;
+
+                client.query(sql_update, (err, result) => {
+                    done();
+                    if (err) {
+                        reject(new ServerError('SQL query failed.', err));
+                        return;
+                    }
+
+                    resolve(id);
                 });
             });
         });

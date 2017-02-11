@@ -25,4 +25,18 @@ router.post('/', (req, res) => {
         .catch(reason => res.status(500).json(reason));
 });
 
+// PUT /news/:id
+router.put('/:id', (req, res) => {
+    newsService.updateItem(req.params.id, req.body, req.query.lang)
+        .then(newsItem => res.json(newsItem))
+        .catch(reason => res.status(500).json(reason));
+});
+
+// DELETE /news/:id
+router.delete('/:id', (req, res) => {
+    newsService.deleteItem(req.params.id)
+        .then(index => res.json(index))
+        .catch(reason => res.status(500).json(reason));
+});
+
 module.exports = router;

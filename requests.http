@@ -20,11 +20,11 @@ GET http://localhost:3000/news/5
 
 #####
 
-GET http://localhost:3000/news/5?lang=ru
+GET http://localhost:3000/news/222?lang=ru
 
 #####
 
-GET http://localhost:3000/news/5?lang=en
+GET http://localhost:3000/news/2?lang=en
 
 #####
 
@@ -43,3 +43,17 @@ content-type: application/json
 }
 
 #####
+
+PUT http://localhost:3000/news/333?lang=en HTTP/1.1
+content-type: application/json
+
+{
+    "title": "updated",
+    "date": "2017-02-07T21:00:00.000Z",
+    "descr": "updated",
+    "content": "updated"
+}
+
+#####
+
+DELETE http://localhost:3000/news/8

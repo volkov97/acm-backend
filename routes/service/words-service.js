@@ -1,10 +1,21 @@
 const pool = require('../../config/db');
 
-class LangService {
+const ServerError = require('../class/server-error');
 
+class WordService {
+
+    constructor() {
+        this.db_table = 'dictionary';
+    }
+    
+    /*
     getLangs() {
         return new Promise((res, rej) => {
-            const sql_lang = "SELECT * FROM d3hknf0t40kep6.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = N'dictionary'"; 
+            const sql_lang = `
+                SELECT * 
+                FROM d3hknf0t40kep6.INFORMATION_SCHEMA.COLUMNS 
+                WHERE TABLE_NAME = N'dictionary'
+            `;
 
             pool.connect((err, client, done) => {
                 if (err) return console.error('error fetching client from pool', err);
@@ -93,7 +104,59 @@ class LangService {
             });
         });
     }
+    */
 
+    getDictionary() {
+        return new Promise((resolve, reject) => {
+            pool.connect((err, client, done) => {
+                if (err) {
+                    reject(new ServerError('Pool connection failed.', err));
+                    return;
+                }
+                
+                const sql_select = `
+                    SELECT *
+                    FROM ${this.db_table}
+                `;
+
+                client.query(sql_select, (err, result) => {
+                    done();
+                    if (err) {
+                        reject(new ServerError('SQL query failed.', err));
+                        return;
+                    }
+
+                    resolve(result.rows);
+                });
+            });
+        });
+    }
+
+    getLang(lang) {
+        return new Promise((resolve, reject) => {
+            pool.connect((err, client, done) => {
+                if (err) {
+                    reject(new ServerError('Pool connection failed.', err));
+                    return;
+                }
+
+                const sql_select = `
+                    SELECT key, ${lang} 
+                    FROM ${this.db_table}
+                `;
+                
+                client.query(sql_select, (err, result) => {
+                    done();
+                    if (err) {
+                        reject(new ServerError('SQL query failed.', err));
+                        return;
+                    }
+
+                    resolve(result.rows);
+                });
+            });
+        });
+    }
 }
 
-module.exports = LangService;
+module.exports = WordService;

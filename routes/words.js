@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 		.then(data => res.json(data))
 		.catch(err => res.status(500).json(err));
 });
-
+/*
 // GET /words/:id
 router.get('/:id', (req, res) => {
 	wordsService.getItem(req.params.id)
@@ -31,5 +31,5 @@ router.get('/:id', (req, res) => {
 		.then(index => res.end(index))
 		.catch(err => res.status(500).json(err));
 });
-
+*/
 module.exports = router;

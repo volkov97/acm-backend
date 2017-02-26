@@ -1,12 +1,14 @@
 package com.owuteam.news;
 
-import com.owuteam.core.BaseEntity;
-
-
-import javax.persistence.Entity;
+import com.owuteam.admin.Admin;
+import javax.persistence.*;
 
 @Entity
-public class News extends BaseEntity {
+public class News {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
     private String systemName;
@@ -14,10 +16,22 @@ public class News extends BaseEntity {
     private int views;
     private int langId;
     private int status;
-    // private int creator_id;
+
+    @OneToOne
+//   @JoinColumn(name = "adminId")
+    private Admin newsAdmin;
 
     public News() {
-        super();
+    }
+
+    public News(String title, String systemName, String content, int views, int langId, int status, Admin newsAdmin) {
+        this.title = title;
+        this.systemName = systemName;
+        this.content = content;
+        this.views = views;
+        this.langId = langId;
+        this.status = status;
+        this.newsAdmin = newsAdmin;
     }
 
     public News(String title, String systemName, String content, int views, int langId, int status) {
@@ -75,5 +89,21 @@ public class News extends BaseEntity {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Admin getNewsAdmin() {
+        return newsAdmin;
+    }
+
+    public void setNewsAdmin(Admin newsAdmin) {
+        this.newsAdmin = newsAdmin;
     }
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "acm_user")
+@Table(name = "acm_users")
 public class User extends BaseEntity{
     @NotNull
     @Size(min = 1, max = 40)

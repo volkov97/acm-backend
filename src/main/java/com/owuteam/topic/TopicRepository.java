@@ -1,9 +1,9 @@
-package com.owuteam.news;
+package com.owuteam.topic;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NewsRepository extends CrudRepository<News, Long> {
+public interface TopicRepository extends CrudRepository<Topic, Long> {
 
 }

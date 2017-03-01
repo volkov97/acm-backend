@@ -2,6 +2,7 @@ package com.owuteam.news;
 
 import com.owuteam.core.BaseEntity;
 import com.owuteam.tags.Tag;
+import com.owuteam.topic.Topic;
 import com.owuteam.user.User;
 
 import javax.persistence.*;
@@ -25,6 +26,9 @@ public class News extends BaseEntity {
 
     @OneToMany(cascade=CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Topic> topics = new ArrayList<>();
 
     public News() {
         super();
@@ -106,5 +110,17 @@ public class News extends BaseEntity {
 
     public void addTag(Tag tagItem) {
         tags.add(tagItem);
+    }
+
+    public void addTopic(Topic topicItem) {
+        topics.add(topicItem);
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 }

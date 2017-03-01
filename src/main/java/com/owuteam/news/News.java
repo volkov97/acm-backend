@@ -24,17 +24,6 @@ public class News extends BaseEntity {
         super();
     }
 
-    public News(String title, String systemName, String content, int views, int langId, int status, User user) {
-        super();
-        this.title = title;
-        this.systemName = systemName;
-        this.content = content;
-        this.views = views;
-        this.langId = langId;
-        this.status = status;
-        this.user = user;
-    }
-
     public News(String title, String systemName, String content, int views, int langId, int status) {
         super();
         this.title = title;

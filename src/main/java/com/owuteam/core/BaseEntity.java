@@ -1,6 +1,5 @@
 package com.owuteam.core;
 
-
 import javax.persistence.*;
 
 @MappedSuperclass

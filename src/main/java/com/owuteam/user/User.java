@@ -10,6 +10,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +19,24 @@ import java.util.List;
 @Table(name = "acm_user")
 public class User extends BaseEntity{
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+    @NotNull
+    @Size(min = 1, max = 40)
     private String firstName;
+
+    @NotNull
+    @Size(min = 1, max = 40)
     private String secondName;
+
+    @NotNull
+    @Size(min = 1, max = 40)
     private String fatherName;
+
+    @NotNull
+    @Size(min = 1, max = 40)
     private String userName;
 
     @JsonIgnore
+    @NotNull
     private String password;
 
     @JsonIgnore
@@ -43,16 +57,6 @@ public class User extends BaseEntity{
         this.userName = userName;
         setPassword(password);
         this.roles = roles;
-    }
-
-    public User(String firstName, String secondName, String fatherName, String userName, String password, String[] roles, List<News> news) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.fatherName = fatherName;
-        this.userName = userName;
-        this.password = password;
-        this.roles = roles;
-        this.news = news;
     }
 
     public String getFirstName() {
@@ -92,7 +96,7 @@ public class User extends BaseEntity{
     }
 
     public void setPassword(String password) {
-        this.password = PASSWORD_ENCODER.encode(password);
+        this.password = password;
     }
 
     public String[] getRoles() {
@@ -107,7 +111,6 @@ public class User extends BaseEntity{
         news.setUser(this);
         this.news.add(news);
     }
-
 
     public List<News> getNews() {
         return news;

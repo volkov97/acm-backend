@@ -25,6 +25,8 @@ public class DatabaseLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         User user1 = new User("Nick", "Bylnov", "Sergey",
                               "bigboss", "1234", new String[]{"ROLE_USER"});
+        User user2 = new User("German", "Volkov", "Sasha",
+                "gera", "1234", new String[]{"ROLE_USER"});
         News newsItem = new News(
                 "a",
                 "b",
@@ -35,6 +37,7 @@ public class DatabaseLoader implements ApplicationRunner {
         );
         user1.addNews(newsItem);
         userRepository.save(user1);
+        userRepository.save(user2);
         newsRepository.save(newsItem);
     }
 }

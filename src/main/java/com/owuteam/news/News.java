@@ -1,9 +1,12 @@
 package com.owuteam.news;
 
 import com.owuteam.core.BaseEntity;
+import com.owuteam.tags.Tag;
 import com.owuteam.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "acm_news")
@@ -19,6 +22,9 @@ public class News extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "creator_id")
     private User user;
+
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Tag> tags = new ArrayList<>();
 
     public News() {
         super();
@@ -88,5 +94,17 @@ public class News extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void addTag(Tag tagItem) {
+        tags.add(tagItem);
     }
 }

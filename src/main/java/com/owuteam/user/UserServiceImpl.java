@@ -12,9 +12,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByUserNameAndPassword(String userName, String password) {
         User user = userRepository.findByUserName(userName);
-        if (user.getPassword().equals(password)) {
-            return user;
+        if (user == null || !user.getPassword().equals(password)) {
+            return null;
         }
-        return null;
+        return user;
     }
 }

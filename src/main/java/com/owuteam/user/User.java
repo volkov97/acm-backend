@@ -3,9 +3,6 @@ package com.owuteam.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.owuteam.core.BaseEntity;
 import com.owuteam.news.News;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -18,7 +15,6 @@ import java.util.List;
 @Entity
 @Table(name = "acm_user")
 public class User extends BaseEntity{
-    public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
     @NotNull
     @Size(min = 1, max = 40)
     private String firstName;

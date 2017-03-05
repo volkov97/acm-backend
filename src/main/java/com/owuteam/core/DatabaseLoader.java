@@ -1,5 +1,6 @@
 package com.owuteam.core;
 
+import com.owuteam.lang.LanguageRepository;
 import com.owuteam.news.News;
 import com.owuteam.news.NewsRepository;
 import com.owuteam.tags.Tag;
@@ -20,13 +21,15 @@ public class DatabaseLoader implements ApplicationRunner {
     private final UserRepository userRepository;
     private final TagRepository tagRepository;
     private final TopicRepository topicRepository;
+    private final LanguageRepository languageRepository;
 
     @Autowired
-    public DatabaseLoader(NewsRepository newsRepository, UserRepository userRepository, TagRepository tagRepository, TopicRepository topicRepository) {
+    public DatabaseLoader(NewsRepository newsRepository, UserRepository userRepository, TagRepository tagRepository, TopicRepository topicRepository, LanguageRepository languageRepository) {
         this.newsRepository = newsRepository;
         this.userRepository = userRepository;
         this.tagRepository = tagRepository;
         this.topicRepository = topicRepository;
+        this.languageRepository = languageRepository;
     }
 
     @Override

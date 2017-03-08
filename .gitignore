@@ -1,6 +1,7 @@
 # Folders
 target
 .idea
+src/main/resources/application.properties
 
 *.class
 *.iml

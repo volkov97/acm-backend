@@ -3,6 +3,7 @@ package com.owuteam.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.owuteam.core.BaseEntity;
 import com.owuteam.news.News;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

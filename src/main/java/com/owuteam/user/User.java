@@ -15,7 +15,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "acm_users")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
+
     @NotNull
     @Size(min = 1, max = 40)
     private String firstName;

@@ -1,6 +1,7 @@
 # Folders
 target
 .idea
+upload-dir
 src/main/resources/application.properties
 
 *.class

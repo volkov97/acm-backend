@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "acm_tags")
 public class Tag extends BaseEntity {
+
     @NotNull
     private String name;
 
@@ -28,4 +29,5 @@ public class Tag extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
 }

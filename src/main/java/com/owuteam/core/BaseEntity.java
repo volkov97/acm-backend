@@ -14,4 +14,5 @@ public abstract class BaseEntity {
     public BaseEntity() {
         this.id = null;
     }
+
 }

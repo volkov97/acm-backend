@@ -58,4 +58,5 @@ public class DatabaseLoader implements ApplicationRunner {
         tagRepository.save(tag1);
         topicRepository.save(topic1);
     }
+
 }

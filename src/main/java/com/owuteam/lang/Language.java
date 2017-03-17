@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class Language extends BaseEntity {
     private String langIso2;
     private String langIso3;
+    private String name;
 
     public Language() {
         super();
@@ -35,5 +36,13 @@ public class Language extends BaseEntity {
 
     public void setLangIso3(String langIso3) {
         this.langIso3 = langIso3;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

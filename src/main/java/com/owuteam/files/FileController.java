@@ -1,4 +1,4 @@
-package com.owuteam.file;
+package com.owuteam.files;
 
 import com.owuteam.storage.StorageFileNotFoundException;
 import com.owuteam.storage.StorageService;
@@ -12,35 +12,33 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class FileUploadController {
+public class FileController {
+
+    private final String folder = "files/";
 
     @Autowired
-    private final StorageService storageService;
+    final StorageService storageService;
 
-    public FileUploadController(StorageService storageService) {
+    public FileController(StorageService storageService) {
         this.storageService = storageService;
     }
 
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/" + folder + "{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+        Resource file = storageService.loadAsResource(folder + filename);
 
-        Resource file = storageService.loadAsResource(filename);
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
                 .body(file);
     }
 
-    @PostMapping("/uploadFile")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes) {
-
-        storageService.store(file);
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
-
-        return "redirect:/";
+    @PostMapping("/" + folder + "upload")
+    @ResponseBody
+    public UploadResponse handleFileUpload(@RequestParam("file") MultipartFile file) {
+        String newPath = storageService.store(file, folder);
+        return new UploadResponse("/" + folder + newPath);
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

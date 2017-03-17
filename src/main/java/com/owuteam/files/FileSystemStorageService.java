@@ -1,4 +1,4 @@
-package com.owuteam.file;
+package com.owuteam.files;
 
 import com.owuteam.storage.StorageException;
 import com.owuteam.storage.StorageFileNotFoundException;
@@ -31,15 +31,17 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file, String folder) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(folder + file.getOriginalFilename()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
+
+        return file.getOriginalFilename();
     }
 
     @Override

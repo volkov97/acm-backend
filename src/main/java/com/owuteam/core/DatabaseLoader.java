@@ -75,10 +75,10 @@ public class DatabaseLoader implements ApplicationRunner {
         newsItem2.addTopic(topic2);
         user1.addNews(newsItem1);
 
-
         userRepository.save(user1);
         newsRepository.save(newsItem1);
         tagRepository.save(tag1);
         topicRepository.save(topic1);
+        newsRepository.save(newsItem2);
     }
 }

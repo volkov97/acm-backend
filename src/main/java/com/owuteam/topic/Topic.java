@@ -15,9 +15,6 @@ public class Topic extends BaseEntity {
 
     private String name;
 
-    @ManyToMany
-    private List<News> news;
-
     public Topic() {
         super();
     }
@@ -34,4 +31,5 @@ public class Topic extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
 }

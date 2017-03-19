@@ -46,14 +46,33 @@ public class DatabaseLoader implements ApplicationRunner {
                 "лямбда выражения",
                 "lambda",
                 1,
+                0,
+                2,
+                3
+        );
+        News newsItem2 = new News(
+                "Пайтон",
+                "python",
+                "8",
+                "джава коре",
+                "java se",
+                "лямбда выражения",
+                "lambda",
+                1,
+                0,
                 2,
                 3
         );
         Tag tag1 = new Tag("popular");
+        Tag tag2 = new Tag("super");
         Topic topic1 = new Topic("bsuir");
+        Topic topic2 = new Topic("ksis");
+
 
         newsItem1.addTag(tag1);
         newsItem1.addTopic(topic1);
+        newsItem1.addTag(tag2);
+        newsItem2.addTopic(topic2);
         user1.addNews(newsItem1);
 
 

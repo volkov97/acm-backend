@@ -50,8 +50,8 @@ public class News extends BaseEntity {
     @OneToMany(cascade=CascadeType.ALL)
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Topic> topics = new ArrayList<>();
+    @OneToOne(cascade=CascadeType.ALL)
+    private Topic topic;
 
     public News() {
         super();
@@ -180,14 +180,14 @@ public class News extends BaseEntity {
     }
 
     public void addTopic(Topic topicItem) {
-        topics.add(topicItem);
+        this.topic = topicItem;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
+    public Topic getTopic() {
+        return topic;
     }
 
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }

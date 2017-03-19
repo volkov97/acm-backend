@@ -3,7 +3,7 @@ _assets
 target
 .idea
 upload-dir
-src/main/resources/application.properties
+# src/main/resources/application.properties
 
 *.class
 *.iml

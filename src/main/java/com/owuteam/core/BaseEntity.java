@@ -28,6 +28,10 @@ public abstract class BaseEntity {
         this.lastModifiedAt = new Date();
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }

@@ -9,12 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class FileController {
 
-    private final String folder = "files/";
+    private final String FOLDER = "files/";
 
     @Autowired
     final StorageService storageService;
@@ -23,10 +22,10 @@ public class FileController {
         this.storageService = storageService;
     }
 
-    @GetMapping("/" + folder + "{filename:.+}")
+    @GetMapping("/" + FOLDER + "{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-        Resource file = storageService.loadAsResource(folder + filename);
+        Resource file = storageService.loadAsResource(FOLDER + filename);
 
         return ResponseEntity
                 .ok()
@@ -34,11 +33,11 @@ public class FileController {
                 .body(file);
     }
 
-    @PostMapping("/" + folder + "upload")
+    @PostMapping("/" + FOLDER + "upload")
     @ResponseBody
     public UploadResponse handleFileUpload(@RequestParam("file") MultipartFile file) {
-        String newPath = storageService.store(file, folder);
-        return new UploadResponse("/" + folder + newPath);
+        String newPath = storageService.store(file, FOLDER);
+        return new UploadResponse("/" + FOLDER + newPath);
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

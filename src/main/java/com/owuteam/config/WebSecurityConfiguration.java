@@ -27,13 +27,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/**").authenticated()
-                .antMatchers(HttpMethod.PUT,"/**").authenticated()
-                .antMatchers(HttpMethod.DELETE,"/**").authenticated()
-                .anyRequest().permitAll()
-                .and()
-                .httpBasic();
+                .csrf().disable();
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.POST,"/**").authenticated()
+//                .antMatchers(HttpMethod.PUT,"/**").authenticated()
+//                .antMatchers(HttpMethod.DELETE,"/**").authenticated()
+//                .anyRequest().permitAll()
+//                .and()
+//                .httpBasic();
     }
 }

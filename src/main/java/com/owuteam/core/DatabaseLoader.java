@@ -46,6 +46,7 @@ public class DatabaseLoader implements ApplicationRunner {
                 "лямбда выражения",
                 "lambda",
                 1,
+                0,
                 2,
                 3
         );

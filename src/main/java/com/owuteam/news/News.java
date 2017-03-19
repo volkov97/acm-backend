@@ -35,7 +35,13 @@ public class News extends BaseEntity {
 
     private int views;
     private int langId;
-    private int status;
+
+    @Column(name = "status_ru")
+    private int statusRU;
+
+    @Column(name = "status_en")
+    private int statusEN;
+
 
     @OneToOne
     @JoinColumn(name = "creator_id")
@@ -51,7 +57,7 @@ public class News extends BaseEntity {
         super();
     }
 
-    public News(String titleRU, String titleEN, String systemName, String contentRU, String contentEN, String descriptionRU, String descriptionEN, int views, int langId, int status) {
+    public News(String titleRU, String titleEN, String systemName, String contentRU, String contentEN, String descriptionRU, String descriptionEN, int views, int langId, int statusRU, int statusEN) {
         this.titleRU = titleRU;
         this.titleEN = titleEN;
         this.systemName = systemName;
@@ -61,7 +67,8 @@ public class News extends BaseEntity {
         this.descriptionEN = descriptionEN;
         this.views = views;
         this.langId = langId;
-        this.status = status;
+        this.statusRU = statusRU;
+        this.statusEN = statusEN;
     }
 
     public String getTitleRU() {
@@ -136,12 +143,20 @@ public class News extends BaseEntity {
         this.langId = langId;
     }
 
-    public int getStatus() {
-        return status;
+    public int getStatusRU() {
+        return statusRU;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatusRU(int statusRU) {
+        this.statusRU = statusRU;
+    }
+
+    public int getStatusEN() {
+        return statusEN;
+    }
+
+    public void setStatusEN(int statusEN) {
+        this.statusEN = statusEN;
     }
 
     public User getUser() {

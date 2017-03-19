@@ -1,4 +1,4 @@
-package com.owuteam.core;
+package com.owuteam.config;
 
 import com.owuteam.user.DetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

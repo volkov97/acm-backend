@@ -32,7 +32,7 @@ public class News extends BaseEntity {
 
     @Column(name = "description_en")
     private String descriptionEN;
-    
+
     private int views;
     private int langId;
     private int status;

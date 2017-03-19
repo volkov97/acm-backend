@@ -38,12 +38,16 @@ public class DatabaseLoader implements ApplicationRunner {
         User user1 = new User("Nick", "Bylnov", "Sergey",
                               "bigboss", "123456", new String[]{"ROLE_USER"});
         News newsItem1 = new News(
-                "olympic",
-                "java",
-                "se,ee",
+               "Джава",
+                "Java",
+                "8",
+                "джава коре",
+                "java se",
+                "лямбда выражения",
+                "lambda",
                 1,
                 2,
-                20
+                3
         );
         Tag tag1 = new Tag("popular");
         Topic topic1 = new Topic("bsuir");

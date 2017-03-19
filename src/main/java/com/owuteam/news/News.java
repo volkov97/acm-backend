@@ -13,9 +13,26 @@ import java.util.List;
 @Table(name = "acm_news")
 public class News extends BaseEntity {
 
-    private String title;
+    @Column(name = "title_ru")
+    private String titleRU;
+
+    @Column(name = "title_en")
+    private String titleEN;
+
     private String systemName;
-    private String content;
+
+    @Column(name = "content_ru")
+    private String contentRU;
+
+    @Column(name = "content_en")
+    private String contentEN;
+
+    @Column(name = "description_ru")
+    private String descriptionRU;
+
+    @Column(name = "description_en")
+    private String descriptionEN;
+    
     private int views;
     private int langId;
     private int status;
@@ -34,22 +51,33 @@ public class News extends BaseEntity {
         super();
     }
 
-    public News(String title, String systemName, String content, int views, int langId, int status) {
-        super();
-        this.title = title;
+    public News(String titleRU, String titleEN, String systemName, String contentRU, String contentEN, String descriptionRU, String descriptionEN, int views, int langId, int status) {
+        this.titleRU = titleRU;
+        this.titleEN = titleEN;
         this.systemName = systemName;
-        this.content = content;
+        this.contentRU = contentRU;
+        this.contentEN = contentEN;
+        this.descriptionRU = descriptionRU;
+        this.descriptionEN = descriptionEN;
         this.views = views;
         this.langId = langId;
         this.status = status;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitleRU() {
+        return titleRU;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitleRU(String titleRU) {
+        this.titleRU = titleRU;
+    }
+
+    public String getTitleEN() {
+        return titleEN;
+    }
+
+    public void setTitleEN(String titleEN) {
+        this.titleEN = titleEN;
     }
 
     public String getSystemName() {
@@ -60,12 +88,36 @@ public class News extends BaseEntity {
         this.systemName = systemName;
     }
 
-    public String getContent() {
-        return content;
+    public String getContentRU() {
+        return contentRU;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContentRU(String contentRU) {
+        this.contentRU = contentRU;
+    }
+
+    public String getContentEN() {
+        return contentEN;
+    }
+
+    public void setContentEN(String contentEN) {
+        this.contentEN = contentEN;
+    }
+
+    public String getDescriptionRU() {
+        return descriptionRU;
+    }
+
+    public void setDescriptionRU(String descriptionRU) {
+        this.descriptionRU = descriptionRU;
+    }
+
+    public String getDescriptionEN() {
+        return descriptionEN;
+    }
+
+    public void setDescriptionEN(String descriptionEN) {
+        this.descriptionEN = descriptionEN;
     }
 
     public int getViews() {

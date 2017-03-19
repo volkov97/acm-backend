@@ -13,23 +13,31 @@ import java.util.List;
 @Table(name = "acm_topics")
 public class Topic extends BaseEntity {
 
-    private String name;
+    private String nameRU;
+    private String nameEN;
 
     public Topic() {
         super();
     }
 
-    public Topic(String name) {
-        super();
-        this.name = name;
+    public Topic(String nameRU, String nameEN) {
+        this.nameRU = nameRU;
+        this.nameEN = nameEN;
     }
 
-    public String getName() {
-        return name;
+    public String getNameRU() {
+        return nameRU;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameRU(String nameRU) {
+        this.nameRU = nameRU;
     }
 
+    public String getNameEN() {
+        return nameEN;
+    }
+
+    public void setNameEN(String nameEN) {
+        this.nameEN = nameEN;
+    }
 }

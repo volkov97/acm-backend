@@ -34,5 +34,4 @@ public class NewsImagesController extends FileController {
         String newPath = storageService.store(file, folder);
         return new UploadResponse("/" + folder + newPath);
     }
-
 }

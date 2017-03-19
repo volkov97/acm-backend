@@ -44,5 +44,4 @@ public class FileController {
     public ResponseEntity handleStorageFileNotFound(StorageFileNotFoundException exc) {
         return ResponseEntity.notFound().build();
     }
-
 }

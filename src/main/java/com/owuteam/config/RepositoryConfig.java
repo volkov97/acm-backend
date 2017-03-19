@@ -1,6 +1,5 @@
 package com.owuteam.config;
 
-import com.owuteam.core.BaseEntity;
 import com.owuteam.lang.Language;
 import com.owuteam.news.News;
 import com.owuteam.tags.Tag;

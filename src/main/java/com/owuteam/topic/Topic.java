@@ -26,5 +26,4 @@ public class Topic extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-
 }

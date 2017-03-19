@@ -36,7 +36,7 @@ public class DatabaseLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         User user1 = new User("Nick", "Bylnov", "Sergey",
-                              "bigboss", "1234", new String[]{"ROLE_USER"});
+                              "bigboss", "123456", new String[]{"ROLE_USER"});
         News newsItem1 = new News(
                 "olympic",
                 "java",
@@ -58,5 +58,4 @@ public class DatabaseLoader implements ApplicationRunner {
         tagRepository.save(tag1);
         topicRepository.save(topic1);
     }
-
 }

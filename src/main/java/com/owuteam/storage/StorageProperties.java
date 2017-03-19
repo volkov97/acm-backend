@@ -17,5 +17,4 @@ public class StorageProperties {
     public void setLocation(String location) {
         this.location = location;
     }
-
 }

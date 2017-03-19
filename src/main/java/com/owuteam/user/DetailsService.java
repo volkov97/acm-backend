@@ -25,5 +25,4 @@ public class DetailsService implements UserDetailsService{
                 AuthorityUtils.createAuthorityList(user.getRoles())
         );
     }
-
 }

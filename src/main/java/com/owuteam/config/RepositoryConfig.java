@@ -1,5 +1,6 @@
 package com.owuteam.config;
 
+import com.owuteam.event.Event;
 import com.owuteam.lang.Language;
 import com.owuteam.news.News;
 import com.owuteam.tags.Tag;
@@ -19,7 +20,8 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
                 News.class,
                 Tag.class,
                 Topic.class,
-                User.class
+                User.class,
+                Event.class
         );
     }
 }

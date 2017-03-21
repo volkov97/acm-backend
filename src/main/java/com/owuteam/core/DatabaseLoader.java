@@ -65,8 +65,8 @@ public class DatabaseLoader implements ApplicationRunner {
         );
         Tag tag1 = new Tag("popular");
         Tag tag2 = new Tag("super");
-        Topic topic1 = new Topic("bsuir");
-        Topic topic2 = new Topic("ksis");
+        Topic topic1 = new Topic("бгуир","bsuir");
+        Topic topic2 = new Topic("ксис","ksis");
 
 
         newsItem1.addTag(tag1);

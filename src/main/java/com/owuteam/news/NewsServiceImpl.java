@@ -23,7 +23,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     @RequestMapping(value = "/news/{id}/topic", method = RequestMethod.POST)
-    public Long addTopic(@PathVariable("id") Long id, @Param("nameRU") String nameRU, @Param("nameEN") String nameEN) {
+    public Long addByTopic(@PathVariable("id") Long id, @Param("nameRU")  String nameRU, @Param("nameEN")  String nameEN) {
 
         News news = newsRepository.findById(id);
         Topic topic = new Topic(nameRU, nameEN);

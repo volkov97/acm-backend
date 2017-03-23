@@ -63,8 +63,8 @@ public class DatabaseLoader implements ApplicationRunner {
                 2,
                 3
         );
-        Tag tag1 = new Tag("popular");
-        Tag tag2 = new Tag("super");
+        Tag tag1 = new Tag("популярное", "popular");
+        Tag tag2 = new Tag("супе","super");
         Topic topic1 = new Topic("бгуир","bsuir");
         Topic topic2 = new Topic("ксис","ksis");
 

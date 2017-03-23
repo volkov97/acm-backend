@@ -10,10 +10,8 @@ import java.util.List;
 public interface NewsRepository extends PagingAndSortingRepository<News, Long> {
 
     List<News> findByTitleRU(@Param("titleRU") String titleRU);
-
     List<News> findByTopicNameEN(@Param("nameEN") String nameEN);
     List<News> findByTopicNameRU(@Param("nameRU") String nameRU);
     List<News> findBySystemName(@Param("systemName") String systemName);
-
     News findById(@Param("id") Long id);
 }

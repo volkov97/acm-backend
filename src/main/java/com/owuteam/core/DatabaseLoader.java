@@ -45,9 +45,9 @@ public class DatabaseLoader implements ApplicationRunner {
                 "java se",
                 "лямбда выражения",
                 "lambda",
+                8,
                 1,
-                2,
-                3
+                1
         );
         News newsItem2 = new News(
                 "Пайтон",
@@ -57,9 +57,9 @@ public class DatabaseLoader implements ApplicationRunner {
                 "java se",
                 "лямбда выражения",
                 "lambda",
+                10,
                 1,
-                2,
-                3
+                1
         );
         Tag tag1 = new Tag("популярное", "popular");
         Tag tag2 = new Tag("супе","super");

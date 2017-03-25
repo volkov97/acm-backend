@@ -34,14 +34,12 @@ public class News extends BaseEntity {
     private String descriptionEN;
 
     private int views;
-    private int langId;
 
     @Column(name = "status_ru")
     private int statusRU;
 
     @Column(name = "status_en")
     private int statusEN;
-
 
     @OneToOne
     @JoinColumn(name = "creator_id")
@@ -57,7 +55,7 @@ public class News extends BaseEntity {
         super();
     }
 
-    public News(String titleRU, String titleEN, String systemName, String contentRU, String contentEN, String descriptionRU, String descriptionEN, int views, int langId, int statusRU, int statusEN) {
+    public News(String titleRU, String titleEN, String systemName, String contentRU, String contentEN, String descriptionRU, String descriptionEN, int views, int statusRU, int statusEN) {
         this.titleRU = titleRU;
         this.titleEN = titleEN;
         this.systemName = systemName;
@@ -66,7 +64,6 @@ public class News extends BaseEntity {
         this.descriptionRU = descriptionRU;
         this.descriptionEN = descriptionEN;
         this.views = views;
-        this.langId = langId;
         this.statusRU = statusRU;
         this.statusEN = statusEN;
     }
@@ -135,14 +132,6 @@ public class News extends BaseEntity {
         this.views = views;
     }
 
-    public int getLangId() {
-        return langId;
-    }
-
-    public void setLangId(int langId) {
-        this.langId = langId;
-    }
-
     public int getStatusRU() {
         return statusRU;
     }
@@ -177,10 +166,6 @@ public class News extends BaseEntity {
 
     public void addTag(Tag tagItem) {
         tags.add(tagItem);
-    }
-
-    public void addTopic(Topic topicItem) {
-        this.topic = topicItem;
     }
 
     public Topic getTopic() {

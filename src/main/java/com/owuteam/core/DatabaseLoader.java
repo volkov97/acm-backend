@@ -46,7 +46,6 @@ public class DatabaseLoader implements ApplicationRunner {
                 "лямбда выражения",
                 "lambda",
                 1,
-                0,
                 2,
                 3
         );
@@ -59,7 +58,6 @@ public class DatabaseLoader implements ApplicationRunner {
                 "лямбда выражения",
                 "lambda",
                 1,
-                0,
                 2,
                 3
         );
@@ -70,9 +68,9 @@ public class DatabaseLoader implements ApplicationRunner {
 
 
         newsItem1.addTag(tag1);
-        newsItem1.addTopic(topic1);
+        newsItem1.setTopic(topic1);
         newsItem1.addTag(tag2);
-        newsItem2.addTopic(topic2);
+        newsItem2.setTopic(topic2);
         user1.addNews(newsItem1);
         user1.addNews(newsItem2);
         userRepository.save(user1);

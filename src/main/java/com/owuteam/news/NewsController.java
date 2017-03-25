@@ -6,21 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class NewsRestController {
+public class NewsController {
 
     private NewsService newsService;
 
     @Autowired
-    public NewsRestController(NewsService newsService) {
+    public NewsController(NewsService newsService) {
         this.newsService = newsService;
     }
 
-    @RequestMapping(value = "/news/{id}/topic", method = RequestMethod.POST)
-    public Long addTopic(@PathVariable Long id, @RequestBody Topic topic)  {
+    @RequestMapping(value = "/news/{id}/bind/topic", method = RequestMethod.POST)
+    public Topic addTopic(@PathVariable Long id, @RequestBody Topic topic)  {
         return newsService.addTopic(id, topic);
     }
 
-    @RequestMapping(value = "/news/{id}/tag", method = RequestMethod.POST)
+    @RequestMapping(value = "/news/{id}/bind/tag", method = RequestMethod.POST)
     public Long addTag(@PathVariable Long id, @RequestBody Tag tag)  {
         return newsService.addTag(id, tag);
     }

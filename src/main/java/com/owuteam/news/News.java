@@ -22,15 +22,19 @@ public class News extends BaseEntity {
     private String systemName;
 
     @Column(name = "content_ru")
+    @Lob
     private String contentRU;
 
     @Column(name = "content_en")
+    @Lob
     private String contentEN;
 
     @Column(name = "description_ru")
+    @Lob
     private String descriptionRU;
 
     @Column(name = "description_en")
+    @Lob
     private String descriptionEN;
 
     private int views;

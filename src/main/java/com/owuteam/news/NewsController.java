@@ -23,7 +23,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/news/{id}/bind/tag", method = RequestMethod.POST)
-    public Long addTag(@PathVariable Long id, @RequestBody Tag tag)  {
+    public ResponseStatus addTag(@PathVariable Long id, @RequestBody Tag tag)  {
         return newsService.addTag(id, tag);
     }
 

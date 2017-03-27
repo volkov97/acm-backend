@@ -24,24 +24,6 @@ public class NewsServiceImpl implements NewsService {
         this.tagRepository = tagRepository;
     }
 
-//    @Override
-//    public Long addTopic(Long id, Topic topic) {
-//        final long ERR = -1;
-//        News news = newsRepository.findById(id);
-//        if (news == null) {
-//            return ERR;
-//        }
-//        Topic result = topicRepository.findByNameRUAndNameEN(topic.getNameRU(), topic.getNameEN());
-//        if (result == null) {
-//            result = topic;
-//        }
-//        //newsRepository.save(news);
-//        news.setTopic(result);
-//        topicRepository.save(result);
-//
-//        return result.getId();
-//    }
-
     @Override
     public Topic addTopic(Long id, Topic topic) {
         News news = newsRepository.findById(id);
@@ -53,8 +35,10 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public Long addTag(Long id, Tag tag) {
-        return new Long(-1);
+    public ResponseStatus addTag(Long id, Tag tag) {
+        News news = newsRepository.findById(id);
+        Tag result = tagRepository.findById(tag.getId());
+        return new ResponseStatus(true);
     }
 
     @Override

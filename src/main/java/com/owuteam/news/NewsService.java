@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface NewsService {
     Topic addTopic(Long id, Topic topic);
-    Long addTag(Long id, Tag tag);
+    ResponseStatus addTag(Long id, Tag tag);
     ResponseStatus deleteNews(List<Long> ids);
 }

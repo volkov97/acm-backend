@@ -4,6 +4,7 @@ import com.owuteam.core.BaseEntity;
 import com.owuteam.tags.Tag;
 import com.owuteam.topic.Topic;
 import com.owuteam.user.User;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,20 +22,25 @@ public class News extends BaseEntity {
 
     private String systemName;
 
-    @Column(name = "content_ru")
+
     @Lob
+    @Type(type = "text")
+    @Column(name = "content_ru")
     private String contentRU;
 
-    @Column(name = "content_en")
     @Lob
+    @Type(type = "text")
+    @Column(name = "content_en")
     private String contentEN;
 
-    @Column(name = "description_ru")
     @Lob
+    @Type(type = "text")
+    @Column(name = "description_ru")
     private String descriptionRU;
 
-    @Column(name = "description_en")
     @Lob
+    @Type(type = "text")
+    @Column(name = "description_en")
     private String descriptionEN;
 
     private int views;

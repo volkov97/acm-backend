@@ -22,7 +22,6 @@ public class News extends BaseEntity {
 
     private String systemName;
 
-
     @Lob
     @Type(type = "text")
     @Column(name = "content_ru")

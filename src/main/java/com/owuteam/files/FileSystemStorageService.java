@@ -36,7 +36,17 @@ public class FileSystemStorageService implements StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(folder + file.getOriginalFilename()));
+            String route = rootLocation.resolve(folder).toString();
+            Path check = Paths.get(route);
+            if (!Files.exists(check)) {
+                try {
+                    Files.createDirectories(check);
+                } catch (IOException e) {
+                    //fail to create directory
+                    e.printStackTrace();
+                }
+            }
+            Files.copy(file.getInputStream(), rootLocation.resolve(folder + file.getOriginalFilename()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
@@ -47,9 +57,9 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public Stream<Path> loadAll() {
         try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(path -> this.rootLocation.relativize(path));
+            return Files.walk(rootLocation, 1)
+                    .filter(path -> !path.equals(rootLocation))
+                    .map(path -> rootLocation.relativize(path));
         } catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }

@@ -1,5 +1,7 @@
 package com.owuteam.news;
 
+import com.owuteam.core.*;
+import com.owuteam.core.ResponseStatus;
 import com.owuteam.tags.Tag;
 import com.owuteam.topic.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +25,10 @@ public class NewsController {
     @RequestMapping(value = "/news/{id}/bind/tag", method = RequestMethod.POST)
     public Long addTag(@PathVariable Long id, @RequestBody Tag tag)  {
         return newsService.addTag(id, tag);
+    }
+
+    @RequestMapping(value = "/news/delete", method = RequestMethod.DELETE)
+    public ResponseStatus deleteTopics(@RequestBody CustomDeleteByIdsRequest req)  {
+        return newsService.deleteNews(req.getIds());
     }
 }

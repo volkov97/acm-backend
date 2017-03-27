@@ -30,11 +30,17 @@ public class Event extends BaseEntity {
     @Column(name = "place_en")
     private String placeEN;
 
+    @Column(name = "status_ru")
+    private int statusRU;
+
+    @Column(name = "status_en")
+    private int statusEN;
+
     public Event() {
         super();
     }
 
-    public Event(String titleRU, String titleEN, String descriptionRU, String descriptionEN, Date date, String placeRU, String placeEN) {
+    public Event(String titleRU, String titleEN, String descriptionRU, String descriptionEN, Date date, String placeRU, String placeEN, int statusRU, int statusEN) {
         this.titleRU = titleRU;
         this.titleEN = titleEN;
         this.descriptionRU = descriptionRU;
@@ -42,6 +48,8 @@ public class Event extends BaseEntity {
         this.date = date;
         this.placeRU = placeRU;
         this.placeEN = placeEN;
+        this.statusRU = statusRU;
+        this.statusEN = statusEN;
     }
 
     public String getTitleRU() {
@@ -99,4 +107,21 @@ public class Event extends BaseEntity {
     public void setPlaceEN(String placeEN) {
         this.placeEN = placeEN;
     }
+
+    public int getStatusRU() {
+        return statusRU;
+    }
+
+    public void setStatusRU(int statusRU) {
+        this.statusRU = statusRU;
+    }
+
+    public int getStatusEN() {
+        return statusEN;
+    }
+
+    public void setStatusEN(int statusEN) {
+        this.statusEN = statusEN;
+    }
+
 }

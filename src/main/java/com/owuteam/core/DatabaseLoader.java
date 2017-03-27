@@ -36,7 +36,7 @@ public class DatabaseLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         User user1 = new User("Nick", "Bylnov", "Sergey",
-                              "bigboss", "123456", new String[]{"ROLE_USER"});
+                              "bigboss", "12345", new String[]{"ROLE_USER"});
         News newsItem1 = new News(
                "Джава",
                 "Java",

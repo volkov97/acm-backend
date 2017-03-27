@@ -1,11 +1,14 @@
 package com.owuteam.news;
 
+import com.owuteam.core.ResponseStatus;
 import com.owuteam.tags.Tag;
 import com.owuteam.tags.TagRepository;
 import com.owuteam.topic.Topic;
 import com.owuteam.topic.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class NewsServiceImpl implements NewsService {
@@ -20,9 +23,6 @@ public class NewsServiceImpl implements NewsService {
         this.newsRepository = newsRepository;
         this.tagRepository = tagRepository;
     }
-
-
-
 
 //    @Override
 //    public Long addTopic(Long id, Topic topic) {
@@ -55,6 +55,14 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public Long addTag(Long id, Tag tag) {
         return new Long(-1);
+    }
+
+    @Override
+    public ResponseStatus deleteNews(List<Long> ids) {
+        for (Long id : ids) {
+            newsRepository.delete(id);
+        }
+        return new ResponseStatus(true);
     }
 
 }

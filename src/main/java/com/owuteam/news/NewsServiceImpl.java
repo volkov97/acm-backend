@@ -38,6 +38,17 @@ public class NewsServiceImpl implements NewsService {
     public ResponseStatus addTag(Long id, Tag tag) {
         News news = newsRepository.findById(id);
         Tag result = tagRepository.findById(tag.getId());
+        boolean fl = false;
+        for (Tag temp : news.getTags()) {
+            if (temp.getId().equals(result.getId())) {
+                fl = true;
+                break;
+            }
+        }
+        if (!fl) {
+            news.addTag(result);
+            newsRepository.save(news);
+        }
         return new ResponseStatus(true);
     }
 

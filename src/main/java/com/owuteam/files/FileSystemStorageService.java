@@ -30,6 +30,18 @@ public class FileSystemStorageService implements StorageService {
         this.rootLocation = Paths.get(properties.getLocation());
     }
 
+    public void makeDir(String route) {
+        Path check = Paths.get(route);
+        if (!Files.exists(check)) {
+            try {
+                Files.createDirectories(check);
+            } catch (IOException e) {
+                //fail to create directory
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public String store(MultipartFile file, String folder) {
         try {
@@ -37,15 +49,8 @@ public class FileSystemStorageService implements StorageService {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
             String route = rootLocation.resolve(folder).toString();
-            Path check = Paths.get(route);
-            if (!Files.exists(check)) {
-                try {
-                    Files.createDirectories(check);
-                } catch (IOException e) {
-                    //fail to create directory
-                    e.printStackTrace();
-                }
-            }
+            // check folder (exist or not)
+            makeDir(route);
             Files.copy(file.getInputStream(), rootLocation.resolve(folder + file.getOriginalFilename()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);

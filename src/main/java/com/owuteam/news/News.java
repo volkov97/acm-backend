@@ -54,7 +54,8 @@ public class News extends BaseEntity {
     @JoinColumn(name = "creator_id")
     private User user;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name = "News_Tags")
     private List<Tag> tags = new ArrayList<>();
 
     @OneToOne(cascade=CascadeType.ALL)

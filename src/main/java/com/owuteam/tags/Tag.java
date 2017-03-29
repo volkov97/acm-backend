@@ -40,5 +40,4 @@ public class Tag extends BaseEntity {
     public void setNameEN(String nameEN) {
         this.nameEN = nameEN;
     }
-    
 }

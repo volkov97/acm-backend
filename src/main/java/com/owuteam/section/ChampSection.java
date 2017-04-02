@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "acm_sections")
+@Table(name = "acm_champSections")
 public class ChampSection extends  BaseEntity {
     private String name;
 
@@ -42,5 +42,9 @@ public class ChampSection extends  BaseEntity {
 
     public void setPages(List<Page> pages) {
         this.pages = pages;
+    }
+
+    public void addPage(Page pageItem) {
+        pages.add(pageItem);
     }
 }

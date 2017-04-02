@@ -65,4 +65,8 @@ public class Champ extends BaseEntity {
     public void setSections(List<ChampSection> sections) {
         this.sections = sections;
     }
+
+    public void addSection(ChampSection sectionItem) {
+        sections.add(sectionItem);
+    }
 }

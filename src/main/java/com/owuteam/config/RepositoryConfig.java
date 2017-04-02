@@ -1,8 +1,11 @@
 package com.owuteam.config;
 
+import com.owuteam.champ.Champ;
 import com.owuteam.event.Event;
 import com.owuteam.lang.Language;
 import com.owuteam.news.News;
+import com.owuteam.page.Page;
+import com.owuteam.section.ChampSection;
 import com.owuteam.tags.Tag;
 import com.owuteam.topic.Topic;
 import com.owuteam.user.User;
@@ -21,7 +24,10 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
                 Tag.class,
                 Topic.class,
                 User.class,
-                Event.class
+                Event.class,
+                Page.class,
+                ChampSection.class,
+                Champ.class
         );
     }
 }

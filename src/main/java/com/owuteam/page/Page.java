@@ -1,11 +1,10 @@
 package com.owuteam.page;
 
 import com.owuteam.core.BaseEntity;
+import com.owuteam.section.ChampSection;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "acm_pages")
@@ -21,6 +20,10 @@ public class Page extends BaseEntity {
     @Lob
     @Type(type = "text")
     private String contentEN;
+
+    @ManyToOne
+    @JoinColumn(name = "champ_section_id")
+    private ChampSection champSection;
 
     public Page() {
         super();
@@ -72,5 +75,13 @@ public class Page extends BaseEntity {
 
     public void setContentEN(String contentEN) {
         this.contentEN = contentEN;
+    }
+
+    public ChampSection getChampSection() {
+        return champSection;
+    }
+
+    public void setChampSection(ChampSection champSection) {
+        this.champSection = champSection;
     }
 }

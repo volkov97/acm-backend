@@ -27,8 +27,9 @@ public class ChampSectionServiceImpl implements ChampSectionService {
         if (champSection == null || tempPage == null) {
             return new ResponseStatus();
         }
-        champSection.addPage(tempPage);
-        champSectionRepository.save(champSection);
+
+        tempPage.setChampSection(champSection);
+        pageRepository.save(tempPage);
         return new ResponseStatus(true);
     }
 

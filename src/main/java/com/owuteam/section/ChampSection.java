@@ -14,8 +14,7 @@ public class ChampSection extends  BaseEntity {
     private String titleRU;
     private String titleEN;
 
-    @OneToMany
-    @JoinColumn(name = "section_id")
+    @OneToMany(mappedBy = "champSection", cascade = CascadeType.ALL)
     private List<Page> pages = new ArrayList<>();
 
     @ManyToOne

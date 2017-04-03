@@ -2,10 +2,8 @@ package com.owuteam.champ;
 
 import com.owuteam.core.BaseEntity;
 import com.owuteam.section.ChampSection;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 
 
 import java.util.ArrayList;
@@ -21,8 +19,7 @@ public class Champ extends BaseEntity {
     private int year;
     private int status;
 
-    @OneToMany
-    @JoinColumn(name = "champ_id")
+    @OneToMany(mappedBy = "champ", cascade = CascadeType.ALL)
     private List<ChampSection> sections = new ArrayList<>();
 
     public Champ() {

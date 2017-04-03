@@ -28,8 +28,8 @@ public class ChampServiceImpl implements ChampService{
         if (champ == null || champSection == null) {
             return new ResponseStatus();
         }
-        champ.addSection(champSection);
-        champRepository.save(champ);
+        champSection.setChamp(champ);
+        champSectionRepository.save(champSection);
         return new ResponseStatus(true);
     }
 

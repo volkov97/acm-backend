@@ -1,12 +1,10 @@
 package com.owuteam.section;
 
+import com.owuteam.champ.Champ;
 import com.owuteam.core.BaseEntity;
 import com.owuteam.page.Page;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,10 @@ public class ChampSection extends  BaseEntity {
     @OneToMany
     @JoinColumn(name = "section_id")
     private List<Page> pages = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "champ_id")
+    private Champ champ;
 
     public ChampSection() {
         super();
@@ -51,6 +53,14 @@ public class ChampSection extends  BaseEntity {
 
     public void setPages(List<Page> pages) {
         this.pages = pages;
+    }
+
+    public Champ getChamp() {
+        return champ;
+    }
+
+    public void setChamp(Champ champ) {
+        this.champ = champ;
     }
 
     public void addPage(Page pageItem) {

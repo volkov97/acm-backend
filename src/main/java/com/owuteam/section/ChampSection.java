@@ -13,7 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "acm_champSections")
 public class ChampSection extends  BaseEntity {
-    private String name;
+    private String titleRU;
+    private String titleEN;
 
     @OneToMany
     @JoinColumn(name = "section_id")
@@ -23,17 +24,25 @@ public class ChampSection extends  BaseEntity {
         super();
     }
 
-    public ChampSection(String name) {
-        super();
-        this.name = name;
+    public ChampSection(String titleRU, String titleEN) {
+        this.titleRU = titleRU;
+        this.titleEN = titleEN;
     }
 
-    public String getName() {
-        return name;
+    public String getTitleRU() {
+        return titleRU;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitleRU(String titleRU) {
+        this.titleRU = titleRU;
+    }
+
+    public String getTitleEN() {
+        return titleEN;
+    }
+
+    public void setTitleEN(String titleEN) {
+        this.titleEN = titleEN;
     }
 
     public List<Page> getPages() {

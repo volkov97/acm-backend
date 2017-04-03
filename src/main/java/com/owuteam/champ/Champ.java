@@ -1,7 +1,7 @@
 package com.owuteam.champ;
 
-import com.owuteam.section.ChampSection;
 import com.owuteam.core.BaseEntity;
+import com.owuteam.section.ChampSection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -15,7 +15,9 @@ import java.util.List;
 @Table(name = "acm_champs")
 public class Champ extends BaseEntity {
 
-    private String name;
+    private String titleRU;
+    private String titleEN;
+    private int isOpen;
     private int year;
     private int status;
 
@@ -27,19 +29,36 @@ public class Champ extends BaseEntity {
         super();
     }
 
-    public Champ(String name, int year, int status) {
-        super();
-        this.name = name;
+    public Champ(String titleRU, String titleEN, int isOpen, int year, int status) {
+        this.titleRU = titleRU;
+        this.titleEN = titleEN;
+        this.isOpen = isOpen;
         this.year = year;
         this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public String getTitleRU() {
+        return titleRU;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitleRU(String titleRU) {
+        this.titleRU = titleRU;
+    }
+
+    public String getTitleEN() {
+        return titleEN;
+    }
+
+    public void setTitleEN(String titleEN) {
+        this.titleEN = titleEN;
+    }
+
+    public int getIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(int isOpen) {
+        this.isOpen = isOpen;
     }
 
     public int getYear() {

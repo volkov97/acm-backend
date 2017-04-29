@@ -1,7 +1,8 @@
 package com.owuteam.user;
 
-import org.springframework.data.repository.query.Param;
+import com.owuteam.core.ResponseStatus;
+import org.springframework.http.ResponseEntity;
 
 public interface UserService {
-    User getByUserNameAndPassword(@Param("userName") String userName, @Param("password") String password);
+    ResponseEntity<?> checkUser(UserInfo userInfo);
 }

@@ -33,15 +33,8 @@ public class User extends BaseEntity {
     @Size(min = 1, max = 40)
     private String userName;
 
-    @JsonIgnore
     @NotNull
     private String password;
-
-    @JsonIgnore
-    private String[] roles;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<News> news = new ArrayList<>();
 
     protected User() {
         super();
@@ -54,7 +47,6 @@ public class User extends BaseEntity {
         this.fatherName = fatherName;
         this.userName = userName;
         setPassword(password);
-        this.roles = roles;
     }
 
     public String getFirstName() {
@@ -95,26 +87,5 @@ public class User extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String[] getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String[] roles) {
-        this.roles = roles;
-    }
-
-    public void addNews(News news) {
-        news.setUser(this);
-        this.news.add(news);
-    }
-
-    public List<News> getNews() {
-        return news;
-    }
-
-    public void setNews(List<News> news) {
-        this.news = news;
     }
 }

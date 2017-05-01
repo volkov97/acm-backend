@@ -18,6 +18,8 @@ public class Champ extends BaseEntity {
     private int isOpen;
     private int year;
     private int status;
+    private String systemName;
+
 
     @OneToMany(mappedBy = "champ", cascade = CascadeType.ALL)
     private List<ChampSection> sections = new ArrayList<>();
@@ -26,12 +28,13 @@ public class Champ extends BaseEntity {
         super();
     }
 
-    public Champ(String titleRU, String titleEN, int isOpen, int year, int status) {
+    public Champ(String titleRU, String titleEN, int isOpen, int year, int status, String systemName) {
         this.titleRU = titleRU;
         this.titleEN = titleEN;
         this.isOpen = isOpen;
         this.year = year;
         this.status = status;
+        this.systemName = systemName;
     }
 
     public String getTitleRU() {
@@ -84,5 +87,13 @@ public class Champ extends BaseEntity {
 
     public void addSection(ChampSection sectionItem) {
         sections.add(sectionItem);
+    }
+
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
     }
 }

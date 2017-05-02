@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.owuteam.core.BaseEntity;
 import com.owuteam.news.News;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -30,6 +27,7 @@ public class User extends BaseEntity {
     private String fatherName;
 
     @NotNull
+    @Column(unique = true)
     @Size(min = 1, max = 40)
     private String userName;
 

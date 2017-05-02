@@ -7,6 +7,8 @@ import com.owuteam.user.User;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +17,16 @@ import java.util.List;
 public class News extends BaseEntity {
 
     @Column(name = "title_ru")
+    @Size(min = 1, max = 80)
     private String titleRU;
 
     @Column(name = "title_en")
+    @Size(min = 1, max = 80)
     private String titleEN;
 
+    @NotNull
+    @Column(unique = true)
+    @Size(min = 1, max = 80)
     private String systemName;
 
     @Lob
@@ -58,7 +65,7 @@ public class News extends BaseEntity {
     @JoinTable(name = "News_Tags")
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne
     private Topic topic;
 
     public News() {

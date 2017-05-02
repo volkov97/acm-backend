@@ -7,13 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "acm_tags")
 public class Tag extends BaseEntity {
+
+    @Size(min = 1, max = 80)
     private String nameRU;
+
+    @Size(min = 1, max = 80)
     private String nameEN;
 
     public Tag() {

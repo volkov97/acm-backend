@@ -2,8 +2,11 @@ package com.owuteam.champ;
 
 import com.owuteam.core.BaseEntity;
 import com.owuteam.section.ChampSection;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 import java.util.ArrayList;
@@ -13,13 +16,22 @@ import java.util.List;
 @Table(name = "acm_champs")
 public class Champ extends BaseEntity {
 
+    @Size(min = 1, max = 80)
     private String titleRU;
+
+    @Size(min = 1, max = 80)
     private String titleEN;
-    private int isOpen;
-    private int year;
-    private int status;
+
+    @Column(unique = true)
+    @NotNull
+    @Size(min = 1, max = 80)
     private String systemName;
 
+    private int isOpen;
+
+    private int year;
+
+    private int status;
 
     @OneToMany(mappedBy = "champ", cascade = CascadeType.ALL)
     private List<ChampSection> sections = new ArrayList<>();
@@ -28,7 +40,7 @@ public class Champ extends BaseEntity {
         super();
     }
 
-    public Champ(String titleRU, String titleEN, int isOpen, int year, int status, String systemName) {
+    public Champ(String titleRU, String titleEN, String systemName, int isOpen, int year, int status) {
         this.titleRU = titleRU;
         this.titleEN = titleEN;
         this.isOpen = isOpen;

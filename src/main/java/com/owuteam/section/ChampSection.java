@@ -5,13 +5,18 @@ import com.owuteam.core.BaseEntity;
 import com.owuteam.page.Page;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "acm_champSections")
 public class ChampSection extends  BaseEntity {
+
+    @Size(min = 1, max = 80)
     private String titleRU;
+
+    @Size(min = 1, max = 80)
     private String titleEN;
 
     @OneToMany(mappedBy = "champSection", cascade = CascadeType.ALL)

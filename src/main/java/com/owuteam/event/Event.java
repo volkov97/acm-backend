@@ -1,32 +1,50 @@
 package com.owuteam.event;
 
+
+
 import com.owuteam.core.BaseEntity;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
 @Table(name = "acm_events")
 public class Event extends BaseEntity {
 
+
+    @Size(min = 1, max = 80)
     @Column(name = "title_ru")
     private String titleRU;
 
+
+    @Size(min = 1, max = 80)
     @Column(name = "title_en")
     private String titleEN;
 
+
+    @Size(min = 1, max = 80)
     @Column(name = "description_ru")
     private String descriptionRU;
 
+
+    @Size(min = 1, max = 80)
     @Column(name = "description_en")
     private String descriptionEN;
+
     private Date date;
 
+    @Size(min = 1, max = 80)
     @Column(name = "place_ru")
     private String placeRU;
 
+
+    @Size(min = 1, max = 80)
     @Column(name = "place_en")
     private String placeEN;
 

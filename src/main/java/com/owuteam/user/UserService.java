@@ -5,4 +5,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface UserService {
     ResponseEntity<?> checkUser(UserInfo userInfo);
+    ResponseEntity<?> checkUser(String userName, String password);
 }

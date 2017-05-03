@@ -27,4 +27,16 @@ public class UserServiceImpl implements UserService {
         }
         return new ResponseEntity<>(user, HttpStatus.FOUND);
     }
+
+    @Override
+    public ResponseEntity<?> checkUser(String userName, String password) {
+        User user = userRepository.findByUserName(userName);
+        if (user == null) {
+            return new ResponseEntity<>(new ResponseStatus(), HttpStatus.NOT_FOUND);
+        }
+        if (!user.getPassword().equals(password)) {
+                return new ResponseEntity<>(new ResponseStatus(), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.FOUND);
+    }
 }

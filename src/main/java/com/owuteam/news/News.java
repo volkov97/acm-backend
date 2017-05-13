@@ -51,6 +51,9 @@ public class News extends BaseEntity {
 
     private int views;
 
+    @Column(name = "img")
+    private String img;
+
     @Column(name = "status_ru")
     private int statusRU;
 
@@ -72,7 +75,7 @@ public class News extends BaseEntity {
         super();
     }
 
-    public News(String titleRU, String titleEN, String systemName, String contentRU, String contentEN, String descriptionRU, String descriptionEN, int views, int statusRU, int statusEN) {
+    public News(String titleRU, String titleEN, String systemName, String contentRU, String contentEN, String descriptionRU, String descriptionEN, int views, int statusRU, int statusEN, String img) {
         this.titleRU = titleRU;
         this.titleEN = titleEN;
         this.systemName = systemName;
@@ -83,6 +86,7 @@ public class News extends BaseEntity {
         this.views = views;
         this.statusRU = statusRU;
         this.statusEN = statusEN;
+        this.img = img;
     }
 
     public String getTitleRU() {
@@ -191,5 +195,13 @@ public class News extends BaseEntity {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

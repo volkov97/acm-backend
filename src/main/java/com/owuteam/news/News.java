@@ -17,16 +17,13 @@ import java.util.List;
 public class News extends BaseEntity {
 
     @Column(name = "title_ru")
-    @Size(min = 1, max = 80)
     private String titleRU;
 
     @Column(name = "title_en")
-    @Size(min = 1, max = 80)
     private String titleEN;
 
     @NotNull
     @Column(unique = true)
-    @Size(min = 1, max = 80)
     private String systemName;
 
     @Lob
@@ -203,5 +200,9 @@ public class News extends BaseEntity {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public void incrementViews() {
+        this.views++;
     }
 }

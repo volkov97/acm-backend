@@ -15,10 +15,7 @@ import java.util.List;
 @Table(name = "acm_topics")
 public class Topic extends BaseEntity {
 
-    @Size(min = 1, max = 80)
     private String nameRU;
-
-    @Size(min = 1, max = 80)
     private String nameEN;
 
     public Topic() {

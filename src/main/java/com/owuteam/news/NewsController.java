@@ -5,6 +5,7 @@ import com.owuteam.core.ResponseStatus;
 import com.owuteam.tags.Tag;
 import com.owuteam.topic.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,5 +31,10 @@ public class NewsController {
     @RequestMapping(value = "/news/delete", method = RequestMethod.DELETE)
     public ResponseStatus deleteTopics(@RequestBody CustomDeleteByIdsRequest req)  {
         return newsService.deleteNews(req.getIds());
+    }
+
+    @RequestMapping(value = "/news/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getNewsItem(@PathVariable Long id)  {
+        return newsService.getNewsItem(id);
     }
 }

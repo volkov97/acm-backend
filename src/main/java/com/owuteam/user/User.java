@@ -15,20 +15,20 @@ import java.util.List;
 public class User extends BaseEntity {
 
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 80)
     private String firstName;
 
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 80)
     private String secondName;
 
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 80)
     private String fatherName;
 
     @NotNull
     @Column(unique = true)
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 80)
     private String userName;
 
     @NotNull

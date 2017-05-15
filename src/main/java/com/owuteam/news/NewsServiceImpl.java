@@ -6,6 +6,8 @@ import com.owuteam.tags.TagRepository;
 import com.owuteam.topic.Topic;
 import com.owuteam.topic.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,4 +62,13 @@ public class NewsServiceImpl implements NewsService {
         return new ResponseStatus(true);
     }
 
+    @Override
+    public ResponseEntity<?> getNewsItem(Long id) {
+        News news = newsRepository.findOne(id);
+        if (news == null) {
+            return new ResponseEntity<>(new ResponseStatus(false), HttpStatus.NOT_FOUND);
+        }
+        news.incrementViews();
+        return new ResponseEntity<>(newsRepository.save(news), HttpStatus.CREATED);
+    }
 }

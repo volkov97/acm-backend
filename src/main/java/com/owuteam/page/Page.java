@@ -12,15 +12,12 @@ import javax.validation.constraints.Size;
 @Table(name = "acm_pages")
 public class Page extends BaseEntity {
 
-    @Size(min = 1, max = 80)
-    private String titleRU;
 
-    @Size(min = 1, max = 80)
+    private String titleRU;
     private String titleEN;
 
     @NotNull
     @Column(unique = true)
-    @Size(min = 1, max = 80)
     private String systemName;
 
     @Lob

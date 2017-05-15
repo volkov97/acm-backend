@@ -13,10 +13,7 @@ import java.util.List;
 @Table(name = "acm_champSections")
 public class ChampSection extends  BaseEntity {
 
-    @Size(min = 1, max = 80)
     private String titleRU;
-
-    @Size(min = 1, max = 80)
     private String titleEN;
 
     @OneToMany(mappedBy = "champSection", cascade = CascadeType.ALL)

@@ -5,8 +5,11 @@ import com.owuteam.core.ResponseStatus;
 import com.owuteam.tags.Tag;
 import com.owuteam.topic.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.ws.Response;
 
 @RestController
 public class NewsController {
@@ -36,5 +39,11 @@ public class NewsController {
     @RequestMapping(value = "/news/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getNewsItem(@PathVariable Long id)  {
         return newsService.getNewsItem(id);
+    }
+
+    @RequestMapping(value = "/news/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateNewsItem(@PathVariable Long id)  {
+        return new ResponseEntity<>(new ResponseStatus(true),
+        HttpStatus.OK);
     }
 }

@@ -71,4 +71,25 @@ public class NewsServiceImpl implements NewsService {
         news.incrementViews();
         return new ResponseEntity<>(newsRepository.save(news), HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<?> updateNewsItem(Long id, News newsItem) {
+        News newsOld = newsRepository.findOne(id);
+        if (newsOld == null) {
+            return new ResponseEntity<>(new ResponseStatus(false), HttpStatus.NOT_FOUND);
+        }
+        newsOld.setTitleRU(newsItem.getTitleRU());
+        newsOld.setTitleEN(newsItem.getTitleEN());
+        newsOld.setContentRU(newsItem.getContentRU());
+        newsOld.setContentEN(newsItem.getContentEN());
+        newsOld.setDescriptionRU(newsItem.getDescriptionRU());
+        newsOld.setDescriptionEN(newsItem.getDescriptionEN());
+        newsOld.setStatusEN(newsItem.getStatusEN());
+        newsOld.setStatusRU(newsItem.getStatusRU());
+        newsOld.setViews(newsItem.getViews());
+        newsOld.setImg(newsItem.getImg());
+        newsOld.setSystemName(newsItem.getSystemName());
+        newsRepository.save(newsOld);
+        return new ResponseEntity<>(new ResponseStatus(true), HttpStatus.CREATED);
+    }
 }

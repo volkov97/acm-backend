@@ -12,4 +12,5 @@ public interface NewsService {
     ResponseStatus addTag(Long id, Tag tag);
     ResponseStatus deleteNews(List<Long> ids);
     ResponseEntity<?> getNewsItem(Long id);
+    ResponseEntity<?> updateNewsItem(Long id, News newsItem);
 }

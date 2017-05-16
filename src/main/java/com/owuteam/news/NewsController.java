@@ -42,8 +42,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/news/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateNewsItem(@PathVariable Long id)  {
-        return new ResponseEntity<>(new ResponseStatus(true),
-        HttpStatus.OK);
+    public ResponseEntity<?> updateNewsItem(@PathVariable Long id, @RequestBody News newsItem)  {
+        return newsService.updateNewsItem(id, newsItem);
     }
 }

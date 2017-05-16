@@ -86,7 +86,6 @@ public class NewsServiceImpl implements NewsService {
         newsOld.setDescriptionEN(newsItem.getDescriptionEN());
         newsOld.setStatusEN(newsItem.getStatusEN());
         newsOld.setStatusRU(newsItem.getStatusRU());
-        newsOld.setViews(newsItem.getViews());
         newsOld.setImg(newsItem.getImg());
         newsOld.setSystemName(newsItem.getSystemName());
         newsRepository.save(newsOld);
